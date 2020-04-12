@@ -19,6 +19,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <sys/stat.h>
 
 #if defined(_WIN32) && !defined(WIN32)
 #define WIN32
@@ -27,7 +28,6 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #ifdef WIN32
 #include <direct.h>
 #include <sys/types.h>
-#include <sys/stat.h>
 bool isExistOnFs(const char* path) {
     struct _stat buf;
     return (_stat(path, &buf) == 0);
@@ -42,7 +42,6 @@ bool changeDirectory(const char* dir) {
 }
 #else
 #include <unistd.h>
-#include <sys/stat.h>
 bool isExistOnFs(const char* path) {
     struct stat buf;
     return (stat(path, &buf) == 0);
